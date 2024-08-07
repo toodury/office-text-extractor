@@ -41,6 +41,9 @@
 	},
 	"scripts": {
 		"compile": "tsc",
+		"build": "npm run clean && npm run build:esm && npm run build:cjs",
+        "build:esm": "tsc --outDir build/",
+        "build:cjs": "tsc --outDir build-cjs/ -p tsconfig.cjs.json && node scripts/move-cjs-to-build.js && rimraf build-cjs",
 		"test": "run-s test:compile test:integration",
 		"test:compile": "tsc --noEmit",
 		"test:quality": "xo source/ test/",
